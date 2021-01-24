@@ -41,7 +41,7 @@
 			$query->bind_param("ss", $_POST['l_user'],($_POST['l_pass']));
 			$query->execute();
 			if(mysqli_num_rows($query->get_result()) != 1)
-				echo error_without_field("Invalid username/password combination");
+				echo error_without_field("Usuario/contraseña incorrectos");
 			else
 			{
 				$_SESSION['type'] = "librarian";

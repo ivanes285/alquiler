@@ -19,11 +19,11 @@
 				<div class="dropdown-content">
 					<a>
 						<?php
-							$query = $con->prepare("SELECT balance FROM member WHERE username = ?;");
+							/*$query = $con->prepare("SELECT balance FROM member WHERE username = ?;");
 							$query->bind_param("s", $_SESSION['username']);
 							$query->execute();
 							$balance = (int)$query->get_result()->fetch_array()[0];
-							echo "Saldo: $".$balance;
+							echo "Saldo: $".$balance;*/
 						?>
 					</a>
 					<a href="my_books.php">Mi Alquiler</a>

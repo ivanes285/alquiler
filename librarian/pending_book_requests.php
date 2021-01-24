@@ -56,7 +56,7 @@
 				echo "</form>";
 			}
 			
-			$header = 'From: <ialescanov@hotmail.com>' . "\r\n";
+			$header = 'From: <delacruztaty74@gmail.com>' . "\r\n";
 			
 			if(isset($_POST['l_grant']))
 			{

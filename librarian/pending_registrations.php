@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<?php
-			$query = $con->prepare("SELECT username, name, email, balance FROM pending_registrations");
+			$query = $con->prepare("SELECT username, name, email FROM pending_registrations");
 			$query->execute();
 			$result = $query->get_result();
 			$rows = mysqli_num_rows($result);
@@ -33,7 +33,6 @@
 							<th>Usuario<hr></th>
 							<th>Nombre<hr></th>
 							<th>Correo<hr></th>
-							<th>Saldo Disponible<hr></th>
 						</tr>";
 				for($i=0; $i<$rows; $i++)
 				{
@@ -46,7 +45,7 @@
 							</label>
 						</td>";
 					$j;
-					for($j=0; $j<3; $j++)
+					for($j=0; $j<2; $j++)
 						echo "<td>".$row[$j]."</td>";
 					echo "<td>$".$row[$j]."</td>";
 					echo "</tr>";
@@ -74,8 +73,15 @@
 						$query->execute();
 						$row = mysqli_fetch_array($query->get_result());
 						
-						$query = $con->prepare("INSERT INTO member(username, password, name, email, balance) VALUES(?, ?, ?, ?, ?);");
-						$query->bind_param("ssssd", $username, $row[1], $row[2], $row[3], $row[4]);
+						$parametro=$username."','".$row[1]."','".$row[2]."','".$row[3];
+						$quer = $con->prepare("SELECT * FROM member ;");
+						$quer->execute();
+						$cantidad=mysqli_num_rows($quer->get_result())+1;								
+						$idparam=$cantidad.",'".$parametro."'";
+
+						$query = $con->prepare("INSERT INTO member VALUES(".$idparam.");");
+						
+						//$query->bind_param("ssssd", $username, $row[1], $row[2], $row[3]);
 						if(!$query->execute())
 							die(error_without_field("ERROR: No se pudieron insertar valores"));
 						$members++;

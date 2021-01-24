@@ -35,10 +35,6 @@
 					<input class="m-email" type="email" name="m_email" id="m_email" placeholder="Correo" required />
 				</div>
 				
-				<div class="icon">
-					<input class="m-balance" type="number" name="m_balance" id="m_balance" placeholder="Saldo Inicial" required />
-				</div>
-				
 				<br />
 				<input type="submit" name="m_register" value="Registrarse" />
 		</form>
@@ -47,10 +43,6 @@
 	<?php
 		if(isset($_POST['m_register']))
 		{
-			if($_POST['m_balance'] < 70)
-				echo error_with_field("Necesita un saldo de al menos 70 dólares para abrir una cuenta", "m_balance");
-			else
-			{
 				$query = $con->prepare("(SELECT username FROM member WHERE username = ?) UNION (SELECT username FROM pending_registrations WHERE username = ?);");
 				$query->bind_param("ss", $_POST['m_user'], $_POST['m_user']);
 				$query->execute();
@@ -65,15 +57,17 @@
 						echo error_with_field("Ya hay una cuenta registrada con ese correo electrónico", "m_email");
 					else
 					{
-						$query = $con->prepare("INSERT INTO pending_registrations(username, password, name, email, balance) VALUES(?, ?, ?, ?, ?);");
-						$query->bind_param("ssssd", $_POST['m_user'],($_POST['m_pass']), $_POST['m_name'], $_POST['m_email'], $_POST['m_balance']);
+						$consult="'".$_POST['m_user']."' , '".($_POST['m_pass'])."' , '".$_POST['m_name']."' , '".$_POST['m_email']."'";
+						$query = $con->prepare("INSERT INTO pending_registrations VALUES(".$consult.");");
+						//$query->bind_param("ssssd", $_POST['m_user'],($_POST['m_pass']), $_POST['m_name'], $_POST['m_email']);
+						//echo($consult);
 						if($query->execute())
-							echo success("Detalles registrados. Se le notificará en la ID de correo electrónico proporcionada cuando se hayan verificado sus datos");
+							echo success("Datos registrados. Se le notificará en la ID de correo electrónico proporcionada cuando se hayan verificado sus datos");
 						else
 							echo error_without_field("No se pudieron registrar los detalles. Por favor, inténtelo de nuevo más tarde");
 					}
 				}
-			}
+			
 		}
 	?>
 	

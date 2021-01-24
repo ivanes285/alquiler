@@ -40,13 +40,13 @@
 	<?php
 		if(isset($_POST['m_login']))
 		{
-			$query = $con->prepare("SELECT id, balance FROM member WHERE username = ? AND password = ?;");
+			$query = $con->prepare("SELECT id FROM member WHERE username = ? AND password = ?;");
 			$query->bind_param("ss", $_POST['m_user'], ($_POST['m_pass']));
 			$query->execute();
 			$result = $query->get_result();
 			
 			if(mysqli_num_rows($result) != 1)
-				echo error_without_field("Invalid username/password combination");
+				echo error_without_field("Usuario/contraseña incorrectos");
 			else 
 			{
 				$resultRow = mysqli_fetch_array($result);
