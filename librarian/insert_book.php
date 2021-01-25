@@ -127,7 +127,7 @@
 				$query->execute();
 				$dispo="si";
 				$idauto=mysqli_num_rows($query->get_result())+1;
-				$consulta=", '".$_POST['b_placa']."', '".$_POST['b_marca']."', '".$_POST['b_modelo']."', '".$_POST['b_categoria']."', ".$_POST['b_precio']."";
+				$consulta=", '".$_POST['b_placa']."', '".$_POST['b_marca']."', '".$_POST['b_modelo']."', '".$_POST['b_categoria']."', ".$_POST['b_precio'].", 1";
 				$cons=$idauto.$consulta;
 				$query = $con->prepare("INSERT INTO autos VALUES ($cons);");
 				if(!$query->execute())

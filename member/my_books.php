@@ -15,7 +15,7 @@
 	<body>
 	
 		<?php
-			$query = $con->prepare("SELECT book_isbn FROM book_issue_log WHERE member = ?;");
+			$query = $con->prepare("SELECT * FROM pending_book_requests WHERE member = ?;");
 			$query->bind_param("s", $_SESSION['username']);
 			$query->execute();
 			$result = $query->get_result();
@@ -34,41 +34,67 @@
 					</div>";
 				echo"<table width='100%' cellpadding='10' cellspacing='10'>
 						<tr>
-							<th></th>
 							<th>Placa<hr></th>
 							<th>Marca<hr></th>
 							<th>Modelo<hr></th>
 							<th>Categoría<hr></th>
-							<th>Fecha de vencimiento<hr></th>
+							<th>Fecha<hr></th>
+							<th>Estado<hr></th>
 						</tr>";
+
+				$num=0;
+
 				for($i=0; $i<$rows; $i++)
 				{
-					$isbn = mysqli_fetch_array($result)[0];
+					$isbn = mysqli_fetch_array($result)[2];
 					if($isbn != NULL)
 					{
-						$query = $con->prepare("SELECT title, author, category FROM book WHERE isbn = ?;");
+						$query = $con->prepare("SELECT * FROM autos WHERE placa = ?;");
 						$query->bind_param("s", $isbn);
 						$query->execute();
 						$innerRow = mysqli_fetch_array($query->get_result());
-						echo "<tr>
-								<td>
+						$num=$innerRow[0];
+						echo "<tr>";
+						/*echo "<td>
 									<label class='control control--checkbox'>
 										<input type='checkbox' name='cb_book".$i."' value='".$isbn."'>
 										<div class='control__indicator'></div>
 									</label>
-								</td>";
+								</td>";*/
 						echo "<td>".$isbn."</td>";
-						for($j=0; $j<3; $j++)
+						for($j=1; $j<4; $j++)
 							echo "<td>".$innerRow[$j]."</td>";
-						$query = $con->prepare("SELECT due_date FROM book_issue_log WHERE member = ? AND book_isbn = ?;");
+
+						/*$query = $con->prepare("SELECT due_date FROM book_issue_log WHERE member = ? AND book_isbn = ?;");
 						$query->bind_param("ss", $_SESSION['username'], $isbn);
+						$query->execute();*/
+
+						$query = $con->prepare("SELECT time, estado FROM pending_book_requests WHERE member = ? ;");
+						$query->bind_param("s", $_SESSION['username']);
 						$query->execute();
-						echo "<td>".mysqli_fetch_array($query->get_result())[0]."</td>";
+						$time_estado=mysqli_fetch_array($query->get_result());
+
+						echo "<td>".$time_estado[0]."</td>";
+						echo "<td>".$time_estado[1]."</td>";
 						echo "</tr>";
 					}
 				}
 				echo "</table><br />";
-				echo "<input type='submit' name='b_return' value='Devolver el/los carros seleccionados' />";
+				//echo "<input type='submit' name='b_return' value='Devolver el/los carros seleccionados' />";
+
+				
+
+				$query = $con->prepare("SELECT * FROM imagenphp WHERE id=? ;");
+				$query->bind_param("i", $num);
+				$query->execute();
+				$fotos = $query->get_result();
+				$phot = mysqli_fetch_array($fotos);
+				echo "<img src='../librarian/".$phot['urlPhoto']."' width='500'>";
+
+
+
+
+
 				echo "</form>";
 			}
 			

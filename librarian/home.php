@@ -12,22 +12,28 @@
 	<body>
 		<div id="allTheThings">
 			<a href="pending_registrations.php">
-				<input type="button" value="Solicitudes de Registro de Clientes Pendientes" />
+				<input type="hidden" value="Solicitudes de Alquiler" />
 			</a><br />
 			<a href="pending_book_requests.php">
-				<input type="button" value="Solicitudes de Carros Pendientes" />
+				<input type="button" value="Solicitudes de Alquileres" />
 			</a><br />
 			<a href="insert_book.php">
-				<input type="button" value="Agregar un Nuevo Carro" />
+				<input type="button" value="Agregar un Nuevo Vehiculo" />
+			</a><br />
+			<a href="carros.php">
+				<input type="button" value="Lista de Vehiculos" />
+			</a><br />
+			<a href="alquileres.php">
+				<input type="button" value="Lista de Alquileres" />
 			</a><br />
 			<a href="update_copies.php">
-				<input type="button" value="Actualizar el número de unidades de un carro" />
+				<input type="hidden" value="Actualizar el número de unidades de un carro" />
 			</a><br />
 			<a href="update_balance.php">
-				<input type="button" value="Actualiza el saldo de un cliente" />
+				<input type="hidden" value="Actualiza el saldo de un cliente" />
 			</a><br />
 			<a href="due_handler.php">
-				<input type="button" value="Recordatorios para hoy" />
+				<input type="hidden" value="Recordatorios para hoy" />
 			</a><br /><br />
 		</div>
 	</body>

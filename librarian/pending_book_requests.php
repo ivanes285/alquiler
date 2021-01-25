@@ -22,7 +22,7 @@
 				echo "<h2 align='center'>Sin solicitudes pendientes</h2>";
 			else
 			{
-				echo "<form class='cd-form' method='POST' action='#'>";
+				echo "<form class='cd-form' method='POST' action='pending_book_requests.php'>";
 				echo "<legend>Solicitudes de Carros Pendientes</legend>";
 				echo "<div class='error-message' id='error-message'>
 						<p id='error'></p>
@@ -33,24 +33,28 @@
 							<th>Usuario<hr></th>
 							<th>Carro<hr></th>
 							<th>Fecha<hr></th>
+							<th>Estado<hr></th>
 						</tr>";
 				for($i=0; $i<$rows; $i++)
 				{
 					$row = mysqli_fetch_array($result);
-					echo "<tr>";
-					echo "<td>
-							<label class='control control--checkbox'>
-								<input type='checkbox' name='cb_".$i."' value='".$row[0]."' />
-								<div class='control__indicator'></div>
-							</label>
-						</td>";
-					for($j=1; $j<4; $j++)
-						echo "<td>".$row[$j]."</td>";
-					echo "</tr>";
+					if ($row[4]=='Pendiente') {
+						echo "<tr>";
+						echo "<td>
+								<label class='control control--checkbox'>
+									<input type='checkbox' name='cb_".$i."' value='".$row[0]."' />
+									<div class='control__indicator'></div>
+								</label>
+							</td>";
+						for($j=1; $j<5; $j++)
+							echo "<td>".$row[$j]."</td>";
+						echo "</tr>";
+					}
+					
 				}
 				echo "</table>";
 				echo "<br /><br /><div style='float: right;'>";
-				echo "<input type='submit' value='Rechazar selección' name='l_reject' />&nbsp;&nbsp;&nbsp;&nbsp;";
+				//echo "<input type='submit' value='Rechazar selección' name='l_reject' />&nbsp;&nbsp;&nbsp;&nbsp;";
 				echo "<input type='submit' value='Aceptar selección' name='l_grant'/>";
 				echo "</div>";
 				echo "</form>";
@@ -84,16 +88,29 @@
 						$to = mysqli_fetch_array($query->get_result())[0];
 						$subject = "Carro emitido con éxito";
 						
-						$query = $con->prepare("SELECT title FROM book WHERE isbn = ?;");
+						$query = $con->prepare("SELECT placa FROM autos WHERE placa = ?;");
 						$query->bind_param("s", $isbn);
 						$query->execute();
 						$title = mysqli_fetch_array($query->get_result())[0];
+
+						//update carro disponibilidad
+						$query = $con->prepare("UPDATE autos SET disponibilidad=0 WHERE placa=?; ");
+						$query->bind_param("s", $isbn);
+						$query->execute();	
+
 						
 						$query = $con->prepare("SELECT due_date FROM book_issue_log WHERE member = ? AND book_isbn = ?;");
 						$query->bind_param("ss", $member, $isbn);
 						$query->execute();
 						$due_date = mysqli_fetch_array($query->get_result())[0];
 						$message = "El carro'".$title."' con placa ".$isbn." ha sido emitido a su cuenta. La fecha de vencimiento para devolver el automovil es ".$due_date.".";
+
+
+						//update estado de solicitud
+						$query = $con->prepare("UPDATE pending_book_requests SET estado='Aprobada' WHERE request_id=?; ");
+						$query->bind_param("d", $request_id);
+						$query->execute();
+
 						
 						//ESTE ES LA LINEA QUE EJECUTA EL MENSAJE
 						@mail($to, $subject, $message, $header);
@@ -101,7 +118,7 @@
 					}
 				}
 				if($requests > 0)
-					echo success("Carro aceptado exitósamente ".$requests." solicitud");
+					echo success("Solicitud aceptada ".$requests." solicitud");
 				else
 					echo error_without_field("Ninguna solicitud seleccionada");
 			}
