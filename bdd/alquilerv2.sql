@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-01-2021 a las 16:05:16
+-- Tiempo de generación: 27-01-2021 a las 16:21:26
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.2.34
 
@@ -197,11 +197,11 @@ CREATE TABLE `member` (
 
 INSERT INTO `member` (`id`, `username`, `password`, `name`, `email`, `edad`) VALUES
 (1, 'Roxana', '12345678', 'Roxana Rios', 'atdelacruzm@utn.edu.ec', 0),
-(2, 'Anita', '1234', 'Ana', 'delacruztaty176@gmail.com', 0),
-(3, 'ivan', '15952', 'Ivan', 'ivanes285@gmail.com', 0),
-(4, 'pepe', '3343', 'Jose', 'afcastrop@utn.edu.ec', 0),
-(5, 'juan', '1234', 'Juan', 'dfb@gmail.com', 0),
-(6, 'marce', '1234', 'marce', 'afc@gmail.com', 0);
+(2, 'Anita', '12345678', 'Ana', 'delacruztaty176@gmail.com', 0),
+(3, 'ivan', '12345678', 'Ivan', 'ivanes285@gmail.com', 0),
+(4, 'pepe', '12345678', 'Jose', 'afcastrop@utn.edu.ec', 0),
+(5, 'juan', '123412345678', 'Juan', 'dfb@gmail.com', 0),
+(6, 'marce', '123412345678', 'marce', 'afc@gmail.com', 0);
 
 --
 -- Disparadores `member`
