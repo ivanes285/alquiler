@@ -54,13 +54,13 @@
 				}
 				echo "</table>";
 				echo "<br /><br /><div style='float: right;'>";
-				//echo "<input type='submit' value='Rechazar selección' name='l_reject' />&nbsp;&nbsp;&nbsp;&nbsp;";
+				echo "<input type='submit' value='Rechazar selección' name='l_reject' />&nbsp;&nbsp;&nbsp;&nbsp;";
 				echo "<input type='submit' value='Aceptar selección' name='l_grant'/>";
 				echo "</div>";
 				echo "</form>";
 			}
 			
-			$header = 'From: <delacruztaty74@gmail.com>' . "\r\n";
+			$header = 'From: <grupo4@gmail.com>' . "\r\n";
 			
 			if(isset($_POST['l_grant']))
 			{
@@ -76,6 +76,13 @@
 						$resultRow = mysqli_fetch_array($query->get_result());
 						$member = $resultRow[0];
 						$isbn = $resultRow[1];
+						$aux="";
+						$queryT = $con->prepare("SELECT * FROM book_issue_log WHERE book_isbn = ?;");
+						$queryT->bind_param("s", $isbn);
+						$queryT->execute();
+						$numauto=mysqli_num_rows($queryT->get_result());
+						if($numauto>0)
+							die(error_without_field("ERROR: No se pudo emitir el carro debido a que ya está rentado"));
 						$query = $con->prepare("INSERT INTO book_issue_log(member, book_isbn) VALUES(?, ?);");
 						$query->bind_param("ss", $member, $isbn);
 						if(!$query->execute())
@@ -103,7 +110,7 @@
 						$query->bind_param("ss", $member, $isbn);
 						$query->execute();
 						$due_date = mysqli_fetch_array($query->get_result())[0];
-						$message = "El carro'".$title."' con placa ".$isbn." ha sido emitido a su cuenta. La fecha de vencimiento para devolver el automovil es ".$due_date.".";
+						$message = "El carro con placa ".$isbn." ha sido emitido a su cuenta. En las fechas: ".$due_date.".";
 
 
 						//update estado de solicitud
@@ -145,18 +152,17 @@
 						$query->execute();
 						$to = mysqli_fetch_array($query->get_result())[0];
 						$subject = "Problema de carro rechazado";
-						
-						$query = $con->prepare("SELECT title FROM book WHERE isbn = ?;");
+
+						$query = $con->prepare("UPDATE autos SET disponibilidad=1 WHERE placa=?; ");
 						$query->bind_param("s", $isbn);
-						$query->execute();
-						$title = mysqli_fetch_array($query->get_result())[0];
-						$message = "Su solicitud para emitir el carro. '".$title."' con placa ".$isbn." Ha sido rechazado. Puedes solicitar el carro nuevamente o visitar el concecionario para obtener más información.";
-						
+						$query->execute();	
 						$query = $con->prepare("DELETE FROM pending_book_requests WHERE request_id = ?");
 						$query->bind_param("d", $request_id);
+
 						if(!$query->execute())
 							die(error_without_field("ERROR: No se pudieron eliminar los valores"));
-							
+						$message = "Su solicitud para rentar el auto de placas: ".$isbn." ha sido rechazado, comuniquese con el administrador para mas detalles";
+	
 						@mail($to, $subject, $message, $header);
 					}
 				}

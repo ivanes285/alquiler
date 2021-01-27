@@ -26,6 +26,7 @@
 							echo "Saldo: $".$balance;*/
 						?>
 					</a>
+					<a href="cambiar_clave.php">Cambiar clave</a>
 					<a href="my_books.php">Mi Alquiler</a>
 					<a href="../logout.php">Cerrar Sesión</a>
 				</div>

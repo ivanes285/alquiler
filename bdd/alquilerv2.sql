@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 25, 2021 at 04:10 AM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-01-2021 a las 16:05:16
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `alquilerv2`
+-- Base de datos: `alquilerv2`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `generate_due_list` ()  NO SQL
 SELECT I.issue_id, M.email, B.isbn, B.title
@@ -35,7 +35,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autos`
+-- Estructura de tabla para la tabla `autos`
 --
 
 CREATE TABLE `autos` (
@@ -49,12 +49,12 @@ CREATE TABLE `autos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `autos`
+-- Volcado de datos para la tabla `autos`
 --
 
 INSERT INTO `autos` (`idauto`, `placa`, `marca`, `modelo`, `tipo`, `precio`, `disponibilidad`) VALUES
 (1, 'AFD-2546', 'Great Wall', 'M4', 'Auto', 62, 0),
-(2, 'AFD-2578', 'Ford', 'Edge', 'Camioneta', 160, 1),
+(2, 'AFD-2578', 'Ford', 'Edge', 'Camioneta', 160, 0),
 (3, 'AFD-2584', 'Mitsubishi', 'L200', 'Camioneta', 170, 1),
 (4, 'AKR-2867', 'Volswagen', 'Tiguan', 'Camioneta', 90, 0),
 (5, 'ASF-5689', 'Chevrolet', 'Spark Gt', 'Auto', 65, 1),
@@ -63,7 +63,7 @@ INSERT INTO `autos` (`idauto`, `placa`, `marca`, `modelo`, `tipo`, `precio`, `di
 (8, 'EAD-5682', 'Nissa', 'Sentra', 'Auto', 75, 1),
 (9, 'ETG-6359', 'Renault', 'Sandero', 'Camioneta', 145, 0),
 (10, 'GDS-2667', 'Kia', 'Rio', 'Auto', 85, 1),
-(11, 'GSA-7992', 'Kia', 'Pikanto', 'Auto', 65, 1),
+(11, 'GSA-7992', 'Kia', 'Pikanto', 'Auto', 65, 0),
 (12, 'IBA-1526', 'GreatWall \r\n', 'Wingle 7', 'Camioneta', 120, 1),
 (13, 'IBA-1558', 'Mitsubishi', 'Oultander', 'Auto', 250, 1),
 (14, 'JAP-1576', 'Hino', 'GH full', 'Pesado', 230, 1),
@@ -72,7 +72,7 @@ INSERT INTO `autos` (`idauto`, `placa`, `marca`, `modelo`, `tipo`, `precio`, `di
 (17, 'MFW-5865', 'John Deer', 'Tractor 6125', 'Pesado', 150, 1),
 (18, 'PAQ-4863', 'Chevrolet', 'Aveo', 'Auto', 75, 1),
 (19, 'PCA-2397', 'Skoda', 'Fabia', 'Auto', 85, 1),
-(20, 'PDF-4526', 'Chevrolet', 'Dimax', 'Camioneta', 80, 1),
+(20, 'PDF-4526', 'Chevrolet', 'Dimax', 'Camioneta', 80, 0),
 (21, 'PDF-4529', 'Mazda', 'Cx-5', 'Camioneta', 60, 1),
 (22, 'TDA-2836', 'Kia', 'Sportage', 'Auto', 90, 1),
 (23, 'TDA-2866', 'Hyundai', 'HD 55', 'Pesado', 300, 1),
@@ -80,12 +80,15 @@ INSERT INTO `autos` (`idauto`, `placa`, `marca`, `modelo`, `tipo`, `precio`, `di
 (25, 'THP-6856', 'Renault', 'Captur', 'Auto', 60, 1),
 (26, 'AZA-156', 'Toyota', 'NOVA', 'Auto', 100, 1),
 (27, 'AZZ-156', 'Toyota', 'AGT', 'Auto', 100, 1),
-(28, 'test1', 'test1', 'test1', 'Camioneta', 45, 0);
+(28, 'test1', 'test1', 'test1', 'Camioneta', 45, 0),
+(29, 'XXX-000', 'Toyota', 'BLR', 'Auto', 100, 1),
+(30, 'ZZZ-999', 'Toyota', 'RDK', 'Auto', 100, 1),
+(31, 'HJU-678', 'Chevrolet', 'GH8', 'Camioneta', 100, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `book_issue_log`
+-- Estructura de tabla para la tabla `book_issue_log`
 --
 
 CREATE TABLE `book_issue_log` (
@@ -97,18 +100,19 @@ CREATE TABLE `book_issue_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `book_issue_log`
+-- Volcado de datos para la tabla `book_issue_log`
 --
 
 INSERT INTO `book_issue_log` (`issue_id`, `member`, `book_isbn`, `due_date`, `last_reminded`) VALUES
-(41, 'roxana', 'CFR-5976', '0000-00-00', NULL),
 (42, 'anita', 'AKR-2867', '0000-00-00', NULL),
-(43, 'ivan', 'ETG-6359', '0000-00-00', NULL);
+(43, 'ivan', 'ETG-6359', '0000-00-00', NULL),
+(45, 'pepe', 'GSA-7992', '0000-00-00', NULL),
+(46, 'marce', 'AFD-2584', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `imagenphp`
+-- Estructura de tabla para la tabla `imagenphp`
 --
 
 CREATE TABLE `imagenphp` (
@@ -117,7 +121,7 @@ CREATE TABLE `imagenphp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `imagenphp`
+-- Volcado de datos para la tabla `imagenphp`
 --
 
 INSERT INTO `imagenphp` (`id`, `urlPhoto`) VALUES
@@ -148,13 +152,15 @@ INSERT INTO `imagenphp` (`id`, `urlPhoto`) VALUES
 (25, 'imagenes/camionetas-consumen-menos-ecuador-4.jpg'),
 (26, 'imagenes/Mazdacx5.jpg'),
 (27, 'imagenes/5dfc109d72500.png'),
-(28, 'imagenes/141727778_2521425498160800_7953421904644812100_n.jpg'),
-(29, 'imagenes/141727778_2521425498160800_7953421904644812100_n.jpg');
+(28, 'imagenes/eclipse-cross-camionetas-suv.jpg'),
+(29, 'imagenes/IMAGEN-BP-1.jpg'),
+(30, 'imagenes/0d2b299490a10f364fc833f2bce3be36.jpg'),
+(31, 'imagenes/07a8b79ea04a17e811923e6bcd82f171.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `librarian`
+-- Estructura de tabla para la tabla `librarian`
 --
 
 CREATE TABLE `librarian` (
@@ -164,7 +170,7 @@ CREATE TABLE `librarian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `librarian`
+-- Volcado de datos para la tabla `librarian`
 --
 
 INSERT INTO `librarian` (`id`, `username`, `password`) VALUES
@@ -173,7 +179,7 @@ INSERT INTO `librarian` (`id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member`
+-- Estructura de tabla para la tabla `member`
 --
 
 CREATE TABLE `member` (
@@ -181,20 +187,24 @@ CREATE TABLE `member` (
   `username` varchar(20) NOT NULL,
   `password` char(40) NOT NULL,
   `name` varchar(80) NOT NULL,
-  `email` varchar(80) NOT NULL
+  `email` varchar(80) NOT NULL,
+  `edad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `member`
+-- Volcado de datos para la tabla `member`
 --
 
-INSERT INTO `member` (`id`, `username`, `password`, `name`, `email`) VALUES
-(1, 'Roxana', '1234', 'Roxana Rios', 'atdelacruzm@utn.edu.ec'),
-(2, 'Anita', '1234', 'Ana', 'delacruztaty176@gmail.com'),
-(3, 'ivan', '1234', 'Ivan', 'ivanes285@gmail.com');
+INSERT INTO `member` (`id`, `username`, `password`, `name`, `email`, `edad`) VALUES
+(1, 'Roxana', '12345678', 'Roxana Rios', 'atdelacruzm@utn.edu.ec', 0),
+(2, 'Anita', '1234', 'Ana', 'delacruztaty176@gmail.com', 0),
+(3, 'ivan', '15952', 'Ivan', 'ivanes285@gmail.com', 0),
+(4, 'pepe', '3343', 'Jose', 'afcastrop@utn.edu.ec', 0),
+(5, 'juan', '1234', 'Juan', 'dfb@gmail.com', 0),
+(6, 'marce', '1234', 'marce', 'afc@gmail.com', 0);
 
 --
--- Triggers `member`
+-- Disparadores `member`
 --
 DELIMITER $$
 CREATE TRIGGER `add_member` AFTER INSERT ON `member` FOR EACH ROW DELETE FROM pending_registrations WHERE username = NEW.username
@@ -208,7 +218,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pending_book_requests`
+-- Estructura de tabla para la tabla `pending_book_requests`
 --
 
 CREATE TABLE `pending_book_requests` (
@@ -220,57 +230,61 @@ CREATE TABLE `pending_book_requests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pending_book_requests`
+-- Volcado de datos para la tabla `pending_book_requests`
 --
 
 INSERT INTO `pending_book_requests` (`request_id`, `member`, `book_isbn`, `time`, `estado`) VALUES
 (1, 'anita', 'AKR-2867', '01/27/2021 - 02/23/2021', 'Aprobada'),
-(2, 'ivan', 'ETG-6359', '01/24/2021 - 01/24/2021', 'Aprobada');
+(2, 'ivan', 'ETG-6359', '01/24/2021 - 01/24/2021', 'Aprobada'),
+(3, 'pepe', 'GSA-7992', '01/24/2021 - 01/24/2021', 'Aprobada'),
+(4, 'juan', 'AFD-2578', '02/15/2021 - 02/19/2021', 'Aprobada'),
+(5, 'marce', 'AFD-2578', '01/25/2021 - 01/25/2021', 'Aprobada');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pending_registrations`
+-- Estructura de tabla para la tabla `pending_registrations`
 --
 
 CREATE TABLE `pending_registrations` (
   `username` varchar(20) NOT NULL,
   `password` char(40) NOT NULL,
   `name` varchar(80) NOT NULL,
-  `email` varchar(80) NOT NULL
+  `email` varchar(80) NOT NULL,
+  `edad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `autos`
+-- Indices de la tabla `autos`
 --
 ALTER TABLE `autos`
   ADD PRIMARY KEY (`idauto`);
 
 --
--- Indexes for table `book_issue_log`
+-- Indices de la tabla `book_issue_log`
 --
 ALTER TABLE `book_issue_log`
   ADD PRIMARY KEY (`issue_id`);
 
 --
--- Indexes for table `imagenphp`
+-- Indices de la tabla `imagenphp`
 --
 ALTER TABLE `imagenphp`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `librarian`
+-- Indices de la tabla `librarian`
 --
 ALTER TABLE `librarian`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `member`
+-- Indices de la tabla `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`id`),
@@ -278,48 +292,48 @@ ALTER TABLE `member`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `pending_book_requests`
+-- Indices de la tabla `pending_book_requests`
 --
 ALTER TABLE `pending_book_requests`
   ADD PRIMARY KEY (`request_id`);
 
 --
--- Indexes for table `pending_registrations`
+-- Indices de la tabla `pending_registrations`
 --
 ALTER TABLE `pending_registrations`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `autos`
+-- AUTO_INCREMENT de la tabla `autos`
 --
 ALTER TABLE `autos`
-  MODIFY `idauto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idauto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `book_issue_log`
+-- AUTO_INCREMENT de la tabla `book_issue_log`
 --
 ALTER TABLE `book_issue_log`
-  MODIFY `issue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `issue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT for table `librarian`
+-- AUTO_INCREMENT de la tabla `librarian`
 --
 ALTER TABLE `librarian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `member`
+-- AUTO_INCREMENT de la tabla `member`
 --
 ALTER TABLE `member`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `pending_book_requests`
+-- AUTO_INCREMENT de la tabla `pending_book_requests`
 --
 ALTER TABLE `pending_book_requests`
   MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;

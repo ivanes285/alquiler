@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<?php
-			$query = $con->prepare("SELECT username, name, email FROM pending_registrations");
+			$query = $con->prepare("SELECT username, name, email, edad FROM pending_registrations");
 			$query->execute();
 			$result = $query->get_result();
 			$rows = mysqli_num_rows($result);
@@ -33,6 +33,7 @@
 							<th>Usuario<hr></th>
 							<th>Nombre<hr></th>
 							<th>Correo<hr></th>
+							<th>Edad<hr></th>
 						</tr>";
 				for($i=0; $i<$rows; $i++)
 				{
@@ -45,9 +46,9 @@
 							</label>
 						</td>";
 					$j;
-					for($j=0; $j<2; $j++)
+					for($j=0; $j<3; $j++)
 						echo "<td>".$row[$j]."</td>";
-					echo "<td>$".$row[$j]."</td>";
+					echo "<td>".$row[$j]."</td>";
 					echo "</tr>";
 				}
 				echo "</table><br /><br />";
@@ -56,10 +57,17 @@
 				echo "<input type='submit' value='Confirmar Selección' name='l_confirm' />";
 				echo "</div>";
 				echo "</form>";
+
 			}
 			
 			$header = 'From: <grupo4@alquiler.com>' . "\r\n";
-			
+			if(isset($_POST['contrasenia']))
+			{
+					//echo rand();
+				echo rand(100, 1000);
+			}
+
+
 			if(isset($_POST['l_confirm']))
 			{
 				$members = 0;
@@ -73,7 +81,7 @@
 						$query->execute();
 						$row = mysqli_fetch_array($query->get_result());
 						
-						$parametro=$username."','".$row[1]."','".$row[2]."','".$row[3];
+						$parametro=$username."','".$row[1]."','".$row[2]."','".$row[3]."','".$row[4];
 						$quer = $con->prepare("SELECT * FROM member ;");
 						$quer->execute();
 						$cantidad=mysqli_num_rows($quer->get_result())+1;								
@@ -88,12 +96,14 @@
 						
 						$to = $row[3];
 						$subject = "Membresía del concecionario aceptada";
-						$message = "Su membresía ha sido aceptada por el concecionario. Ahora puede solicitar carros con su cuenta.";
+						$message = "Su membresia ha sido aceptada por el concecionario. Ahora puede solicitar carros con su cuenta.";
 						mail($to, $subject, $message, $header);
 					}
 				}
 				if($members > 0)
 					echo success("Exitosamente agregado ".$members."cliente");
+
+					
 				else
 					echo error_without_field("Ningún registro seleccionado");
 			}
@@ -119,7 +129,7 @@
 						
 						$to = $email;
 						$subject = "Solicitud de membresía rechazada";
-						$message = "Su membresía ha sido rechazada por el concecionario. Póngase en contacto con un administrador para más información.";
+						$message = "Su membresia ha sido rechazada por el concecionario. Póngase en contacto con un administrador para más información.";
 						mail($to, $subject, $message, $header);
 					}
 				}

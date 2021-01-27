@@ -26,7 +26,7 @@
 			</div>
 			
 			<div class="icon">
-				<input class="m-pass" type="password" name="m_pass" placeholder="Contraseña" required />
+				<input class="m-pass" type="password" name="m_pass" minlength="8" maxlength="15" placeholder="Contraseña minimo 8 caracteres" placeholder="Contraseña" required />
 			</div>
 			
 			<input type="submit" value="Ingresar" name="m_login" />
@@ -34,6 +34,7 @@
 			<br /><br /><br /><br />
 			
 			<p align="center">¿No tienes cuenta aún?&nbsp;<a href="register.php">Regístrate</a>
+			<p align="center">¿Olvidaste tu contraseña?&nbsp;<a href="recuperar_clave.php">Recupérala</a>
 		</form>
 	</body>
 	

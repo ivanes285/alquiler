@@ -12,7 +12,7 @@
 	<body>
 		<div id="allTheThings">
 			<a href="pending_registrations.php">
-				<input type="hidden" value="Solicitudes de Alquiler" />
+				<input type="button" value="Solicitudes de Registro" />
 			</a><br />
 			<a href="pending_book_requests.php">
 				<input type="button" value="Solicitudes de Alquileres" />

@@ -53,7 +53,7 @@ require "header_member.php";
 		echo "<table width='100%' cellpadding=10 cellspacing=10>";
 		echo "<tr>
 						<th></th>
-						<th>Nro<hr></th>
+						<th>ID<hr></th>
 						<th>Placa<hr></th>
 						<th>Marca<hr></th>
 						<th>Modelo<hr></th>
