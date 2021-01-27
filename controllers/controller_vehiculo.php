@@ -23,4 +23,9 @@ switch ($opcion) {
         break;
     case "editar":
         break;
+        
+    case "actualizar":
+        break;
+    
+    
 }

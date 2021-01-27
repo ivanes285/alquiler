@@ -18,6 +18,7 @@ class Vehiculo {
     private $categoria;
     private $tipo;
     private $precio;
+    private $kilometraje;
     
     function getPlaca() {
         return $this->placa;
@@ -38,7 +39,9 @@ class Vehiculo {
     function getPrecio() {
         return $this->precio;
     }
-
+    function getKilometraje() {
+        return $this->kilometraje;
+    }
     function setPlaca($placa) {
         $this->placa = $placa;
     }
@@ -58,6 +61,10 @@ class Vehiculo {
     function setPrecio($precio) {
         $this->precio = $precio;
     }
+    function setKilometraje($kilometraje) {
+        $this->kilometraje = $kilometraje;
+    }
+
 
 
 

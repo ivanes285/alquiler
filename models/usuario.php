@@ -20,7 +20,8 @@ class Usuario {
     private $direcion;
     private $correo;
     private $contrasenia;
-    
+    private $ciudad;
+
     function getCedula() {
         return $this->cedula;
     }
@@ -48,7 +49,12 @@ class Usuario {
     function getContrasenia() {
         return $this->contrasenia;
     }
+    
+    function getCiudad() {
 
+        return $this->ciudad;
+    }
+    
     function setCedula($cedula) {
         $this->cedula = $cedula;
     }
@@ -76,7 +82,9 @@ class Usuario {
     function setContrasenia($contrasenia) {
         $this->contrasenia = $contrasenia;
     }
-
+    function setCiudad($ciudad) {
+        $this->ciudad = $ciudad;
+    }
 
 
 }
