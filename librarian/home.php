@@ -11,6 +11,9 @@
 	</head>
 	<body>
 		<div id="allTheThings">
+			<a href="ListaMiembros.php">
+				<input type="button" value="Lista de Miembros" />
+			</a><br />
 			<a href="pending_registrations.php">
 				<input type="button" value="Solicitudes de Registro" />
 			</a><br />
