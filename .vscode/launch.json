@@ -9,20 +9,21 @@
             "request": "launch",
             "type": "pwa-chrome",
             "url": "http://localhost:80",
+            "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
         },
         {
             "name": "Launch Edge",
             "request": "launch",
             "type": "pwa-msedge",
-            "url": "http://localhost:80",
+            "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
         },
         {
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:80",
+            "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
         }
     ]
