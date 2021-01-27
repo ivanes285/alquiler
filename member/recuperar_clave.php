@@ -41,7 +41,7 @@
 				}else
 				{
 					$header = 'From: <grupo4@alquiler.com>' . "\r\n";
-					$nueva=rand(100, 999);
+					$nueva=rand(10000000, 99999999);
 					$nueva=$nueva."";
 					echo($nueva);
 					$consulta="'".$nueva."' WHERE username = '".$_POST['m_userR']."'";
