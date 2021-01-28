@@ -25,7 +25,7 @@
 					document.getElementById("error-message").className = "success-message";
 			</script>; 
 			<div class="icon">
-				<input class="m-pass" type="text" name="m_passC" minlength="8" maxlength="15" placeholder="Contraseña minimo 8 caracteres" placeholder="Contraseña" required />
+				<input class="m-pass" type="password" name="m_passC" minlength="8" maxlength="15" placeholder="Contraseña minimo 8 caracteres" placeholder="Contraseña" required />
 			</div>
 			<input type="submit" value="Eviar" name="clave_C" />
 			<br /><br /><br /><br />

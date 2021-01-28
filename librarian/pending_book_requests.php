@@ -110,7 +110,7 @@
 						$query->bind_param("ss", $member, $isbn);
 						$query->execute();
 						$due_date = mysqli_fetch_array($query->get_result())[0];
-						$message = "El carro con placa ".$isbn." ha sido emitido a su cuenta. En las fechas: ".$due_date.".";
+						$message = "El carro con placa ".$isbn." ha sido emitido a su cuenta.";
 
 
 						//update estado de solicitud

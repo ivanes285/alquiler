@@ -24,7 +24,7 @@
 			<div class="icon">
 				<input class="m-user" type="text" name="m_userR" placeholder="Usuario" required />
 			</div>
-			<input type="submit" value="Eviar" name="clave_R" />
+			<input type="submit" value="Enviar" name="clave_R" />
 			<br /><br /><br /><br />
 		</form>
 		<?php
@@ -43,14 +43,14 @@
 					$header = 'From: <grupo4@alquiler.com>' . "\r\n";
 					$nueva=rand(10000000, 99999999);
 					$nueva=$nueva."";
-					echo($nueva);
+					//echo($nueva);
 					$consulta="'".$nueva."' WHERE username = '".$_POST['m_userR']."'";
 					$query = $con->prepare("UPDATE member SET password = ".$consulta.";");
 					if(!$query->execute())
 						die(error_without_field("ERROR: No se pudo procesar su petición"));
 					$to = $email."";
 					$subject = "Recuperacion de clave";
-					$message = "Estimado usuario, esta clave: ".$nueva." es temporal, debe cambiarla de inmediato.";
+					$message = "Estimado usuario, esta clave: ".$nueva." es generada de manera automática, debe cambiarla de inmediato.";
 					mail($to, $subject, $message, $header);
 					echo success("Se ha envido una nueva clave su correo electrónico, por favor cambiarla de inmediato");	
 				}							
